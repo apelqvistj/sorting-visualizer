@@ -20,13 +20,13 @@ export default {
   },
   data() {
     return {
-      array: [...Array(10)].map(() => Math.floor(Math.random() * 101)),
+      array: [...Array(10)].map(() => Math.floor(Math.random() * 100) + 1),
       algorithm: 'bubble'
     }
   },
   methods: {
     changeElements(value) {
-      this.array = [...Array(value)].map(() => Math.floor(Math.random() * 101))
+      this.array = [...Array(value)].map(() => Math.floor(Math.random() * 100) + 1)
     },
     changeAlgorithm(algo) {
       this.algorithm = algo

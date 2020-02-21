@@ -1,6 +1,6 @@
 <template>
     <div class='view'>
-        <div class='list' >
+        <div id='list' >
             <div v-for="(num, index) in array" class='element' v-bind:style="{ height: num +'%' }" :key="index" v-bind:data-idx="index">&nbsp;</div>
         </div>
     </div>
@@ -20,19 +20,22 @@
         methods: {
             bubbleSort(arr) {
                 let swap;
+                let queue = [];
                 do{
-                    setInterval( () => {
-                        swap = false;
-                        arr.forEach((num, i) => {
-                            if (num > arr[i+1]) {
-                                const temp = num;
-                                arr.splice(i, 1, arr[i+1]);
-                                arr.splice(i+1, 1, temp); 
-                                swap = true;
-                            }
-                        })
-                    }, 300-this.value)
+                    swap = false;
+                    arr.forEach((num, i) => {
+                        queue.push([i, i+1, false]);
+                        if (num > arr[i+1]) {
+                            queue.pop();
+                            queue.push([i, i+1, true]);
+                            const temp = num;
+                            arr[i] = arr[i+1];
+                            arr[i+1] = temp;
+                            swap = true;
+                        }
+                    })
                 } while (swap === true);
+                this.visualize(queue, arr.length);
             },
             mergeSort(arr) {
                 return arr;
@@ -42,6 +45,34 @@
             },
             quickSort(arr) {
                 return arr;
+            },
+            visualize(queue, length) {
+                const elements = document.getElementById('list').childNodes;
+                const i = queue[0][0];
+                const j = queue[0][1];
+
+                if (i < length - 1) {
+                    if (queue[0][2]) {
+                        const newHeight = elements[j].style.height;
+                        elements[j].style.height = elements[i].style.height;
+                        elements[i].style.height = newHeight;
+                    }
+                    elements[j].style.backgroundColor = 'red';
+                    elements[i].style.backgroundColor = 'black';
+                } else {
+                    elements[i].style.backgroundColor = 'black';
+                }
+                
+                queue.splice(0, 1);
+                if (!queue[0]) {
+                    elements.forEach((element) => {
+                        element.style.backgroundColor = 'green';
+                    })
+                    return;
+                }
+                setTimeout( () => {
+                    this.visualize(queue, length);
+                }, 210-length)
             }
         }
     }
@@ -54,7 +85,7 @@
         max-width: 100%;
         height: 50%;
     }
-    .list {
+    #list {
         width: 100%;
         height: 100%;
         display: flex;

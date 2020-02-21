@@ -33,7 +33,7 @@
         justify-content: space-evenly;
         padding: 10px 100px 10px 100px;
         background-color: #233559;
-        color: #E09F29;
+        height: 40px;
     }
     .cta {
         font-size: 1.5em;

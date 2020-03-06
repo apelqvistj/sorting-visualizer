@@ -1,14 +1,6 @@
 <template>
     <div class="menuwrapper">
-        <span class="cta">Pick a sorting algorithm!</span>
-        <div class="algomenu">
-            <ul>
-                <li>Bubble sort</li>
-                <li>Merge sort</li>
-                <li>Insertion sort</li>
-                <li>Quick sort</li>
-            </ul>
-        </div>
+        <span class="cta">Sorting visualizer 3000</span>
     </div>
 </template>
 
@@ -37,8 +29,5 @@
     }
     .cta {
         font-size: 1.5em;
-    }
-    .algomenu {
-        display: inline-block;
     }
 </style>

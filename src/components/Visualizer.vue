@@ -17,17 +17,21 @@
                 type: Number
             }
         },
+        data() {
+            return  {
+                queue: []
+            }
+        },
         methods: {
             bubbleSort(arr) {
                 let swap;
-                let queue = [];
                 do{
                     swap = false;
                     arr.forEach((num, i) => {
-                        queue.push([i, i+1, false]);
+                        this.queue.push([i, i+1, false]);
                         if (num > arr[i+1]) {
-                            queue.pop();
-                            queue.push([i, i+1, true]);
+                            this.queue.pop();
+                            this.queue.push([i, i+1, true]);
                             const temp = num;
                             arr[i] = arr[i+1];
                             arr[i+1] = temp;
@@ -35,10 +39,34 @@
                         }
                     })
                 } while (swap === true);
-                this.visualize(queue, arr.length);
+                this.visualize(this.queue, arr.length);
             },
             mergeSort(arr) {
-                return arr;
+                if (arr.length < 2) {
+                    return arr;
+                }
+                const middle = Math.floor(arr.length / 2);
+                const left = arr.slice(0, middle);
+                const right = arr.slice(middle);
+                
+                return this.merge(this.mergeSort(left), this.mergeSort(right));
+            },
+            merge(left, right) {
+                let res = [];
+                let li = 0;
+                let ri = 0;
+
+                while (li < left.length && ri < right.length) {
+                    if (left[li] < right[ri]) {
+                        res.push(left[li]);
+                        li++;
+                    } else {
+                        res.push(right[ri]);
+                        ri++;
+                    }
+                }
+
+                return res.concat(left.slice(li)).concat(right.slice(ri));
             },
             insertSort(arr) {
                 return arr;
@@ -65,9 +93,6 @@
                 
                 queue.splice(0, 1);
                 if (!queue[0]) {
-                    elements.forEach((element) => {
-                        element.style.backgroundColor = 'green';
-                    })
                     return;
                 }
                 setTimeout( () => {

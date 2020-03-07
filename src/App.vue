@@ -35,9 +35,11 @@ export default {
       switch (this.algorithm) {
         case 'bubble':
           this.$refs.visualizer.bubbleSort(this.array);
+          this.$refs.visualizer.bubbleVis(this.$refs.visualizer.queue, this.array.length);
           break;
         case 'merge':
           this.$refs.visualizer.mergeSort(this.array);
+          this.$refs.visualizer.mergeVis(this.$refs.visualizer.queue, this.$refs.visualizer.queue.length, this.array.length);
           break;
         case 'insert':
           this.$refs.visualizer.insertSort(this.array);

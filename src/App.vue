@@ -43,6 +43,7 @@ export default {
           break;
         case 'insert':
           this.$refs.visualizer.insertSort(this.array);
+          this.$refs.visualizer.insertVis(this.$refs.visualizer.queue, this.array.length);
           break;
         case 'quick':
           this.$refs.visualizer.quickSort(this.array, 0, this.array.length - 1);

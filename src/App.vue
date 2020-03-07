@@ -45,7 +45,8 @@ export default {
           this.$refs.visualizer.insertSort(this.array);
           break;
         case 'quick':
-          this.$refs.visualizer.quickSort(this.array);
+          this.$refs.visualizer.quickSort(this.array, 0, this.array.length - 1);
+          this.$refs.visualizer.quickVis(this.$refs.visualizer.queue, this.$refs.visualizer.queue.length, this.array.length);
           break;
       }
     }

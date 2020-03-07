@@ -63,7 +63,7 @@
                 if (!queue[0]) {
                     parent.childNodes.forEach( (el) => {
                         el.style.backgroundColor = 'green';
-                    })
+                    });
                     return;
                 }
                 setTimeout( () => {
@@ -142,8 +142,75 @@
             insertSort(arr) {
                 return arr;
             },
-            quickSort(arr) {
+            quickSort(arr, left, right) {
+                let index;
+                if (arr.length > 1) {
+                    index = this.partition(arr, left, right);
+                    if (left < index - 1) {
+                        this.quickSort(arr, left, index - 1);
+                    }
+
+                    if (index < right) {
+                        this.quickSort(arr, index, right);
+                    }
+                }
+
                 return arr;
+            },
+            partition(arr, left, right) {
+                const pivot = arr[Math.floor((right + left) / 2)];
+                const pidx = Math.floor((right + left) / 2);
+                let i = left;
+                let j = right;
+
+                while (i <= j) {
+                    while (arr[i] < pivot) {
+                        this.queue.push([i, pidx, true, false]);
+                        this.queue.push([i, pidx, false, false]);
+                        i++;
+                    }
+                    while (arr[j] > pivot) {
+                        this.queue.push([j, pidx, true, false]);
+                        this.queue.push([j, pidx, false, false]);
+                        j--;
+                    }
+
+                    if (i <= j) {
+                        const temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                        this.queue.push([i, j, false, true]);
+                        i++;
+                        j--;
+                    }
+                }
+                return i;
+            },
+            quickVis(queue, length, nodes) {
+                const SPEED = Math.ceil((210-nodes) / 2);
+                for (let i = 0; i < length; i++) {
+                    const parent = document.getElementById('list');
+                    const elements = parent.childNodes;
+                    const [first, second, toColor, isSwap] = queue[i];
+                    if (isSwap) {
+                        setTimeout( () => {
+                            const newHeight = elements[first].style.height;
+                            elements[first].style.height = elements[second].style.height;
+                            elements[second].style.height = newHeight;
+                        }, i * SPEED);
+                    } else {
+                        setTimeout( () => {
+                            elements.forEach( (el) => {
+                                el.style.backgroundColor = 'black';
+                            });
+                            elements[second].style.backgroundColor = 'blue';
+                            if (toColor) {
+                                elements[first].style.backgroundColor = 'red';
+                            } 
+                        }, i * SPEED);
+                    }
+                    
+                }
             }            
         }
     }

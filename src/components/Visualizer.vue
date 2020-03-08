@@ -55,22 +55,20 @@
                         setTimeout( () => {
                             elements[j].style.height = elements[i].style.height;
                             elements[i].style.height = newHeight;
-                        }, 250 - length)
+                        }, (210 - length) / 2)
                     }
                 } 
                 
                 queue.splice(0, 1);
                 if (!queue[0]) {
-                    parent.childNodes.forEach( (el) => {
-                        el.style.backgroundColor = 'green';
-                    });
+                    this.toggleRunning();
                     return;
                 }
                 setTimeout( () => {
                     elements[i].style.backgroundColor = 'black';
                     if (elements[j]) elements[j].style.backgroundColor = 'black';
                     this.bubbleVis(queue, length);
-                }, 500 - length)
+                }, (210 - length) / 2)
             },
             mergeSort(arr) {
                 if (arr.length < 2) {
@@ -137,6 +135,14 @@
                             elements[firstIdx].style.height = `${height}%`;
                         }, i * SPEED);
                     }
+                    if (i+1 == length) {
+                        setTimeout( () => {
+                            elements.forEach( (el) => {
+                                el.style.backgroundColor = 'black';
+                            })
+                            this.toggleRunning();
+                        }, i * SPEED)
+                    }
                 }
             },
             insertSort(arr) {
@@ -184,6 +190,14 @@
                             elements[idx].style.height = `${height}%`;                        
                         }
                     }, i * SPEED);
+                    if (i+1 == queue.length) {
+                        setTimeout( () => {
+                            elements.forEach( (el) => {
+                                el.style.backgroundColor = 'black';
+                            })
+                            this.toggleRunning();
+                        }, i * SPEED)
+                    }
                 }
             },
             quickSort(arr, left, right) {
@@ -253,8 +267,18 @@
                             } 
                         }, i * SPEED);
                     }
-                    
+                    if (i+1 == length) {
+                        setTimeout( () => {
+                            elements.forEach( (el) => {
+                                el.style.backgroundColor = 'black';
+                            })
+                            this.toggleRunning();
+                        }, i * SPEED)
+                    }
                 }
+            },
+            toggleRunning() {
+                this.$emit('run');
             }            
         }
     }

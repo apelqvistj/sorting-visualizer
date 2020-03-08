@@ -2,7 +2,7 @@
     <div class='optionsWrapper'>
         <h3>{{ value }} elements</h3>
         <div class='sliderContainer'>
-            <vue-slider ref="slider" v-model="value" v-bind="options" v-on:change="sendValue"></vue-slider>
+            <vue-slider ref="slider" v-model="value" v-bind="options" v-on:change="sendValue" :disabled="isRunning"></vue-slider>
         </div>
         <hr>
         <div class='algorithmContainer'>
@@ -13,7 +13,8 @@
                 <li id="quick" v-on:click="pickAlgo('quick')">Quick sort</li>
             </ul>
         </div>
-        <button v-on:click="visualize">Visualize!</button>
+        <button v-on:click="visualize" :disabled="isRunning">Visualize!</button>
+        <button v-on:click="reset" :disabled="isRunning">New array</button>
     </div>
 </template>
 
@@ -46,7 +47,8 @@
                     lazy: false,
                     tooltip: 'active',
                     tooltipPlacement: 'top'
-                }
+                },
+                isRunning: false
             }
         },
         methods: {
@@ -62,6 +64,9 @@
             },
             visualize() {
                 this.$emit('visualize')
+            },
+            reset() {
+                this.$emit('reset')
             }
         }
     }

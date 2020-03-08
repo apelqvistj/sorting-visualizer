@@ -4,13 +4,13 @@
         <div class='sliderContainer'>
             <vue-slider ref="slider" v-model="value" v-bind="options" v-on:change="sendValue" :disabled="isRunning"></vue-slider>
         </div>
-        <hr>
         <div class='algorithmContainer'>
             <ul>
                 <li id="bubble" class='algorithm active' v-on:click="pickAlgo('bubble')">Bubble sort</li>
                 <li id="merge" class='algorithm' v-on:click="pickAlgo('merge')">Merge sort</li>
                 <li id="insert" class='algorithm' v-on:click="pickAlgo('insert')">Insertion sort</li>
                 <li id="quick" class='algorithm' v-on:click="pickAlgo('quick')">Quick sort</li>
+                <li id="select" class='algorithm' v-on:click="pickAlgo('select')">Selection sort</li>
             </ul>
         </div>
         <div class='button primary' v-on:click="visualize" :disabled="isRunning">Visualize!</div>

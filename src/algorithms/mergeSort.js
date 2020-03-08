@@ -70,7 +70,8 @@ export const mergeSort = {
                 setTimeout( () => {
                     const [firstIdx, height] = queue[i];
                     elements[firstIdx].style.height = `${height}%`;
-                    elements[firstIdx].innerHTML = "<span class='value' style='color: #F7FCE7'>"+height+"</span>";
+                    const display = elements.length > 40 ? 'none' : 'block';
+                    elements[firstIdx].innerHTML = "<span class='value' style='color: #F7FCE7; display: "+display+"'>"+height+"</span>";
                 }, i * SPEED);
             }
             if (i+1 == length) {

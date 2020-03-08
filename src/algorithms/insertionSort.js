@@ -49,8 +49,9 @@ export const insertionSort = {
                 } else {
                     const idx = action[0];
                     const height = action[1];
-                    elements[idx].style.height = `${height}%`;      
-                    elements[idx].innerHTML = "<span class='value' style='color: #F7FCE7'>"+height+"</span>";                  
+                    elements[idx].style.height = `${height}%`; 
+                    const display = elements.length > 40 ? 'none' : 'block';
+                    elements[idx].innerHTML = "<span class='value' style='color: #F7FCE7; display: "+display+"'>"+height+"</span>";                  
                 }
             }, i * SPEED);
             if (i+1 == queue.length) {

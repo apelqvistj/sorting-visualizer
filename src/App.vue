@@ -3,7 +3,8 @@
     <Visualizer 
       v-bind:array="array" 
       v-bind:value="array.length" 
-      v-on:run="toggleRunning"  
+      v-on:run="toggleRunning"
+      :key="key"
       ref="visualizer" />
 
     <Options 
@@ -26,21 +27,18 @@ export default {
     Visualizer,
     Options
   },
-  mounted() {
-    this.changeElements(10);
-  },
   data() {
     return {
       array: [...Array(10)].map(() => Math.floor(Math.random() * (100 - 5 + 1) + 5)),
       algorithm: 'bubble',
-      elements: 10
+      elements: 10,
+      key: 0
     }
   },
   methods: {
     changeElements(value) {
       this.elements = value;
       this.reset();
-      this.toggleValues();
     },
     changeAlgorithm(algo) {
       this.algorithm = algo
@@ -61,28 +59,18 @@ export default {
         case 'quick':
           this.$refs.visualizer.quickSort(this.array, 0, this.array.length - 1);
           break;
+        case 'select':
+          this.$refs.visualizer.selectionSort(this.array);
+          break;
       }
     },
     reset() {
-      this.array = [...Array(this.elements)].map(() => Math.floor(Math.random() * (100 - 5 + 1) + 5));
+      let elements = this.elements;
+      this.array = [...Array(elements)].map(() => Math.floor(Math.random() * (100 - 5 + 1) + 5));
+      this.key++;
     },
     toggleRunning() {
       this.$refs.options.isRunning = !this.$refs.options.isRunning;
-    },
-    toggleValues() {
-      let display;
-      if (this.elements > 40) {
-        display = 'none';
-      } else {
-        display = 'block';
-      }
-
-      //Kasst
-      setTimeout( () => {
-        document.querySelectorAll('.value').forEach( (el) => {
-          el.style.display = display;        
-        })
-      }, 5)
     }
   }
 

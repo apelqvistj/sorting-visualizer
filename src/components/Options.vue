@@ -13,8 +13,8 @@
                 <li id="quick" v-on:click="pickAlgo('quick')">Quick sort</li>
             </ul>
         </div>
-        <button v-on:click="visualize" :disabled="isRunning">Visualize!</button>
-        <button v-on:click="reset" :disabled="isRunning">New array</button>
+        <div class='button primary' v-on:click="visualize" :disabled="isRunning">Visualize!</div>
+        <div class='button secondary' v-on:click="reset" :disabled="isRunning">New array</div>
     </div>
 </template>
 
@@ -93,6 +93,27 @@
         cursor: pointer;
     }
     .active {
-        color: white;
+        color: #FAFAFA;
+    }
+    .button {
+        display: inline-block;
+        width: 175px;
+        box-sizing: border-box;
+        font-size: 1.3em;
+        box-shadow: 0 5px 14px rgba(0,0,0,0.3);
+        text-align: center;
+        border-radius: 50px;
+        margin: 10px;
+        padding: 20px;
+        cursor: pointer;
+        color: #FAFAFA;
+        border: 1px solid rgb(66, 106, 179, .5);
+    }
+    .primary {
+        background: linear-gradient(to right, rgba(126, 40, 167, 0.5), rgba(124,122,255,.5) 50%, rgba(2,122,233,.5) 100%);
+    }
+    .primary:hover,
+    .secondary:hover {
+        background: linear-gradient(to right, rgba(126, 40, 167, 0.7), rgba(124,122,255, 0.7) 50%, rgba(2,122,233, 0.7) 100%);
     }
 </style>

@@ -61,7 +61,7 @@ export const mergeSort = {
             const colorChange = i % 3 !== 2;
             if (colorChange) {
                 const [firstIdx, secondIdx] = queue[i];
-                const color = i % 3 == 0 ? 'red' : 'black';
+                const color = i % 3 == 0 ? Visualizer.data().SECONDARY_COLOR : Visualizer.data().PRIMARY_COLOR;
                 setTimeout( () => {
                     elements[firstIdx].style.backgroundColor = color;
                     elements[secondIdx].style.backgroundColor = color;
@@ -70,12 +70,13 @@ export const mergeSort = {
                 setTimeout( () => {
                     const [firstIdx, height] = queue[i];
                     elements[firstIdx].style.height = `${height}%`;
+                    elements[firstIdx].innerHTML = "<span class='value' style='color: #F7FCE7'>"+height+"</span>";
                 }, i * SPEED);
             }
             if (i+1 == length) {
                 setTimeout( () => {
                     elements.forEach( (el) => {
-                        el.style.backgroundColor = 'black';
+                        el.style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
                     })
                     queue = [];
                     Visualizer.methods.toggleRunning(context);

@@ -38,24 +38,25 @@ export const insertionSort = {
             setTimeout( () => {
                 if (!action[2]) {
                     const key = action[0];
-                    elements[key].style.backgroundColor = 'blue';
+                    elements[key].style.backgroundColor = Visualizer.data().TERTIARY_COLOR;
                 } else if (!action[3]) {
                     const comp = action[0];
-                    if (elements[comp].style.backgroundColor != 'red') {
-                        elements[comp].style.backgroundColor = 'red';
+                    if (elements[comp].style.backgroundColor != Visualizer.data().SECONDARY_COLOR) {
+                        elements[comp].style.backgroundColor = Visualizer.data().SECONDARY_COLOR;
                     } else {
-                        elements[comp].style.backgroundColor = 'black';
+                        elements[comp].style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
                     }
                 } else {
                     const idx = action[0];
                     const height = action[1];
-                    elements[idx].style.height = `${height}%`;                        
+                    elements[idx].style.height = `${height}%`;      
+                    elements[idx].innerHTML = "<span class='value' style='color: #F7FCE7'>"+height+"</span>";                  
                 }
             }, i * SPEED);
             if (i+1 == queue.length) {
                 setTimeout( () => {
                     elements.forEach( (el) => {
-                        el.style.backgroundColor = 'black';
+                        el.style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
                     })
                     queue = [];
                     Visualizer.methods.toggleRunning(context);

@@ -60,24 +60,27 @@ export const quickSort = {
             if (isSwap) {
                 setTimeout( () => {
                     const newHeight = elements[first].style.height;
+                    const newContent = elements[first].innerHTML;
                     elements[first].style.height = elements[second].style.height;
+                    elements[first].innerHTML = elements[second].innerHTML;
+                    elements[second].innerHTML = newContent;
                     elements[second].style.height = newHeight;
                 }, i * SPEED);
             } else {
                 setTimeout( () => {
                     elements.forEach( (el) => {
-                        el.style.backgroundColor = 'black';
+                        el.style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
                     });
-                    elements[second].style.backgroundColor = 'blue';
+                    elements[second].style.backgroundColor = Visualizer.data().TERTIARY_COLOR;
                     if (toColor) {
-                        elements[first].style.backgroundColor = 'red';
+                        elements[first].style.backgroundColor = Visualizer.data().SECONDARY_COLOR;
                     } 
                 }, i * SPEED);
             }
             if (i+1 == length) {
                 setTimeout( () => {
                     elements.forEach( (el) => {
-                        el.style.backgroundColor = 'black';
+                        el.style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
                     })
                     queue = [];
                     Visualizer.methods.toggleRunning(context);

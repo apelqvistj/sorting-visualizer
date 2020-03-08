@@ -7,10 +7,10 @@
         <hr>
         <div class='algorithmContainer'>
             <ul>
-                <li id="bubble" class='active' v-on:click="pickAlgo('bubble')">Bubble sort</li>
-                <li id="merge" v-on:click="pickAlgo('merge')">Merge sort</li>
-                <li id="insert" v-on:click="pickAlgo('insert')">Insertion sort</li>
-                <li id="quick" v-on:click="pickAlgo('quick')">Quick sort</li>
+                <li id="bubble" class='algorithm active' v-on:click="pickAlgo('bubble')">Bubble sort</li>
+                <li id="merge" class='algorithm' v-on:click="pickAlgo('merge')">Merge sort</li>
+                <li id="insert" class='algorithm' v-on:click="pickAlgo('insert')">Insertion sort</li>
+                <li id="quick" class='algorithm' v-on:click="pickAlgo('quick')">Quick sort</li>
             </ul>
         </div>
         <div class='button primary' v-on:click="visualize" :disabled="isRunning">Visualize!</div>
@@ -87,14 +87,21 @@
         padding: 0;
         margin: 10px;
     }
-    li {
+    .algorithm {
         display: inline-block;
         margin: 0 15px;
         cursor: pointer;
-    }
-    .active {
         color: #FAFAFA;
+        font-weight: bold;
     }
+    .algorithm:hover {
+        color: #AAAAAA;
+    }
+    .active,
+    .active:hover {
+        color: #E09F29;
+    }
+    
     .button {
         display: inline-block;
         width: 175px;
@@ -112,8 +119,14 @@
     .primary {
         background: linear-gradient(to right, rgba(126, 40, 167, 0.5), rgba(124,122,255,.5) 50%, rgba(2,122,233,.5) 100%);
     }
-    .primary:hover,
-    .secondary:hover {
+    .primary:hover {
         background: linear-gradient(to right, rgba(126, 40, 167, 0.7), rgba(124,122,255, 0.7) 50%, rgba(2,122,233, 0.7) 100%);
+    }
+    .primary:active,
+    .secondary:active {
+        box-shadow: none;
+    }
+    .secondary:hover {
+        color: #AAAAAA;
     }
 </style>

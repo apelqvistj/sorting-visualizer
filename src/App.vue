@@ -26,9 +26,12 @@ export default {
     Visualizer,
     Options
   },
+  mounted() {
+    this.changeElements(10);
+  },
   data() {
     return {
-      array: [...Array(10)].map(() => Math.floor(Math.random() * 100) + 1),
+      array: [...Array(10)].map(() => Math.floor(Math.random() * (100 - 5 + 1) + 5)),
       algorithm: 'bubble',
       elements: 10
     }
@@ -37,6 +40,7 @@ export default {
     changeElements(value) {
       this.elements = value;
       this.reset();
+      this.toggleValues();
     },
     changeAlgorithm(algo) {
       this.algorithm = algo
@@ -60,11 +64,25 @@ export default {
       }
     },
     reset() {
-      this.array = [...Array(this.elements)].map(() => Math.floor(Math.random() * 100) + 1);
-      //this.$forceUpdate();
+      this.array = [...Array(this.elements)].map(() => Math.floor(Math.random() * (100 - 5 + 1) + 5));
     },
     toggleRunning() {
       this.$refs.options.isRunning = !this.$refs.options.isRunning;
+    },
+    toggleValues() {
+      let display;
+      if (this.elements > 40) {
+        display = 'none';
+      } else {
+        display = 'block';
+      }
+
+      //Kasst
+      setTimeout( () => {
+        document.querySelectorAll('.value').forEach( (el) => {
+          el.style.display = display;        
+        })
+      }, 5)
     }
   }
 

@@ -28,12 +28,15 @@ export const bubbleSort = {
         const j = action[1];
         
         if (i < length - 1) {
-            elements[i].style.backgroundColor = 'red';
-            elements[j].style.backgroundColor = 'red';
+            elements[i].style.backgroundColor = Visualizer.data().SECONDARY_COLOR;
+            elements[j].style.backgroundColor = Visualizer.data().SECONDARY_COLOR;
             if (action[2]) {
                 const newHeight = elements[j].style.height;
+                const newContent = elements[j].innerHTML;
                 setTimeout( () => {
                     elements[j].style.height = elements[i].style.height;
+                    elements[j].innerHTML = elements[i].innerHTML;
+                    elements[i].innerHTML = newContent;
                     elements[i].style.height = newHeight;
                 }, (210 - length) / 2)
             }
@@ -45,8 +48,8 @@ export const bubbleSort = {
             return;
         }
         setTimeout( () => {
-            elements[i].style.backgroundColor = 'black';
-            if (elements[j]) elements[j].style.backgroundColor = 'black';
+            elements[i].style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
+            if (elements[j]) elements[j].style.backgroundColor = Visualizer.data().PRIMARY_COLOR;
             this.animate(queue, length, context);
         }, (210 - length) / 2)
     }

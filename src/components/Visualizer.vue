@@ -1,7 +1,9 @@
 <template>
     <div class='view'>
         <div id='list' >
-            <div v-for="(num, index) in array" class='element' v-bind:style="{ height: num +'%' }" :key="index" v-bind:data-idx="index">&nbsp;</div>
+            <div v-for="(num, index) in array" class='element' v-bind:style="{ height: num +'%', width: 1000 / array.length+'px' }" :key="index" v-bind:data-idx="index">
+                <span class='value'>{{ num }}</span>
+            </div>
         </div>
     </div>
 </template>
@@ -20,6 +22,13 @@
             },
             value: {
                 type: Number
+            }
+        },
+        data() {
+            return {
+                PRIMARY_COLOR: '#233559',
+                SECONDARY_COLOR: '#E09F29',
+                TERTIARY_COLOR: '#BA324F'
             }
         },
         methods: {
@@ -58,9 +67,13 @@
         align-items: flex-end;
     }
     .element {
-        display: inline-block;
-        background-color: black;
-        width: 10px;
-        margin: 1px;
+        display: flex;
+        background-color: #233559;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .value {
+        color: #F7FCE7;
+        display: none;
     }
 </style>

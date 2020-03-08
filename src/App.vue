@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-
-    <AlgorithmMenu />
-
     <Visualizer 
       v-bind:array="array" 
       v-bind:value="array.length" 
@@ -20,14 +17,12 @@
 </template>
 
 <script>
-import AlgorithmMenu from './components/AlgorithmMenu.vue'
 import Visualizer from './components/Visualizer.vue'
 import Options from './components/Options.vue'
 
 export default {
   name: 'App',
   components: {
-    AlgorithmMenu,
     Visualizer,
     Options
   },
@@ -48,32 +43,25 @@ export default {
     },
     visualize() {
       this.$refs.visualizer.queue = [];
+      this.toggleRunning();
       switch (this.algorithm) {
         case 'bubble':
           this.$refs.visualizer.bubbleSort(this.array);
-          this.toggleRunning();
-          this.$refs.visualizer.bubbleVis(this.$refs.visualizer.queue, this.array.length);
           break;
         case 'merge':
           this.$refs.visualizer.mergeSort(this.array);
-          this.toggleRunning();
-          this.$refs.visualizer.mergeVis(this.$refs.visualizer.queue, this.$refs.visualizer.queue.length, this.array.length);
           break;
         case 'insert':
           this.$refs.visualizer.insertSort(this.array);
-          this.toggleRunning();
-          this.$refs.visualizer.insertVis(this.$refs.visualizer.queue, this.array.length);
           break;
         case 'quick':
           this.$refs.visualizer.quickSort(this.array, 0, this.array.length - 1);
-          this.toggleRunning();
-          this.$refs.visualizer.quickVis(this.$refs.visualizer.queue, this.$refs.visualizer.queue.length, this.array.length);
           break;
       }
     },
     reset() {
       this.array = [...Array(this.elements)].map(() => Math.floor(Math.random() * 100) + 1);
-      this.$refs.visualizer.queue = [];
+      //this.$forceUpdate();
     },
     toggleRunning() {
       this.$refs.options.isRunning = !this.$refs.options.isRunning;

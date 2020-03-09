@@ -12,9 +12,10 @@
                 <li id="quick" class='algorithm' v-on:click="pickAlgo('quick')">Quick sort</li>
                 <li id="select" class='algorithm' v-on:click="pickAlgo('select')">Selection sort</li>
             </ul>
+            <div id="selectionUnderline">&nbsp;</div>
         </div>
-        <div class='button primary' v-on:click="visualize" :disabled="isRunning">Visualize!</div>
-        <div class='button secondary' v-on:click="reset" :disabled="isRunning">New array</div>
+        <button class='button primary' v-on:click="visualize" :disabled="isRunning">Visualize!</button>
+        <button class='button secondary' v-on:click="reset" :disabled="isRunning">New array</button>
     </div>
 </template>
 
@@ -27,12 +28,15 @@
         components: {
             VueSlider
         },
+        mounted() {
+            this.positionUnderline();
+        },
         data() {
             return {
                 value: 10,
                 options: {
                     dotSize: 25,
-                    width: '100%',
+                    width: '50%',
                     height: 10,
                     contained: false,
                     direction: 'ltr',
@@ -62,7 +66,7 @@
                 if (document.querySelector('#'+id).classList.contains('active')) return;
                 document.querySelector('.active').classList.remove('active');
                 document.querySelector('#'+id).classList.add('active');
-
+                this.positionUnderline();
                 this.$emit('changeAlgorithm', id)
             },
             visualize() {
@@ -70,6 +74,14 @@
             },
             reset() {
                 this.$emit('reset')
+            },
+            positionUnderline() {
+                let active = document.querySelector('.active');
+                let left = active.getBoundingClientRect().left;
+                let width = active.getBoundingClientRect().width;
+                let underline = document.querySelector('#selectionUnderline');
+                underline.style.width = width+'px';
+                underline.style.left = left+'px';
             }
         }
     }
@@ -88,7 +100,8 @@
     ul {
         list-style-type: none;
         padding: 0;
-        margin: 10px;
+        margin-top: 10px;
+        margin-bottom: 0px;
     }
     .algorithm {
         display: inline-block;
@@ -104,21 +117,39 @@
     .active:hover {
         color: rgb(82, 153, 211);
     }
-    
+    #selectionUnderline {
+        height: 2px;
+        background-color: rgb(82, 153, 211);
+        transition: 0.25s ease-out;
+        position: absolute;
+    }
     .button {
         display: inline-block;
-        width: 175px;
+        min-width: 136px;
+        width: 20vw;
+        max-width: 175px;
         box-sizing: border-box;
         font-size: 1.3em;
         box-shadow: 0 0 14px rgba(200,200,200,0.3);
         text-align: center;
-        border-radius: 50px;
-        margin: 10px;
+        border-radius: 40px;
+        margin: 30px 10px;
         padding: 20px;
         cursor: pointer;
         color: #FAFAFA;
+        border: none;
+        background-color: rgb(30, 30, 30);
     }
-    .primary {
+    .button:focus {
+        border: none;
+        outline: none;
+    }
+    .button:disabled {
+        color: #AAAAAA;
+        box-shadow: none;
+    }
+    .primary,
+    .primary:disabled:hover {
         background: linear-gradient(to right, rgba(126, 40, 167, 0.5), rgba(124,122,255,.5) 50%, rgba(2,122,233,.5) 100%);
     }
     .primary:hover {
@@ -130,5 +161,8 @@
     }
     .secondary:hover {
         color: #AAAAAA;
+    }
+    .vue-slider {
+        margin: auto;
     }
 </style>

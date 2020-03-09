@@ -36,8 +36,8 @@
         },
         data() {
             return {
-                PRIMARY_COLOR: 'rgb(35, 53, 89)',
-                SECONDARY_COLOR: 'rgb(224, 159, 41)',
+                PRIMARY_COLOR: 'rgb(30, 30, 30)',
+                SECONDARY_COLOR: 'rgb(82, 153, 211)',
                 TERTIARY_COLOR: 'rgb(186, 50, 79)'
             }
         },
@@ -85,15 +85,17 @@
         padding-top: 50px;
     }
     #list {
-        width: 100%;
+        margin: auto;
+        width: 80%;
         height: 100%;
         display: flex;
         justify-content: space-around;
         align-items: flex-end;
+       
     }
     .element {
         display: flex;
-        background-color: #233559;
+        background-color: rgb(30, 30, 30);
         align-items: flex-end;
         justify-content: center;
         margin-left: 1px;

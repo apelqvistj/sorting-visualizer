@@ -86,7 +86,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    color: #E09F29;
+    color: rgb(82, 153, 211);
   }
   body {
     margin: 0;

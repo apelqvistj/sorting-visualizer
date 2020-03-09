@@ -46,7 +46,10 @@
                     adsorb: false,
                     lazy: false,
                     tooltip: 'active',
-                    tooltipPlacement: 'top'
+                    tooltipPlacement: 'top',
+                    processStyle: {
+                        backgroundColor: 'rgb(82, 153, 211)'
+                    }
                 },
                 isRunning: false
             }
@@ -74,7 +77,7 @@
 
 <style scoped>
     .optionsWrapper {
-        background-color: #233559;
+        background-color: rgb(30, 30, 30);
         width: 100vw;
         max-width: 100%;
         flex-grow: 1;
@@ -99,7 +102,7 @@
     }
     .active,
     .active:hover {
-        color: #E09F29;
+        color: rgb(82, 153, 211);
     }
     
     .button {
@@ -107,14 +110,13 @@
         width: 175px;
         box-sizing: border-box;
         font-size: 1.3em;
-        box-shadow: 0 5px 14px rgba(0,0,0,0.3);
+        box-shadow: 0 0 14px rgba(200,200,200,0.3);
         text-align: center;
         border-radius: 50px;
         margin: 10px;
         padding: 20px;
         cursor: pointer;
         color: #FAFAFA;
-        border: 1px solid rgb(66, 106, 179, .5);
     }
     .primary {
         background: linear-gradient(to right, rgba(126, 40, 167, 0.5), rgba(124,122,255,.5) 50%, rgba(2,122,233,.5) 100%);
